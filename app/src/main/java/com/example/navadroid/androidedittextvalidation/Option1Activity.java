@@ -75,7 +75,8 @@ public class Option1Activity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 // TODO: add your Password validation here
 
-                // Password can be anything
+
+                validatePwd();
 
             }
         });
@@ -153,23 +154,24 @@ public class Option1Activity extends AppCompatActivity {
 
     // To validate password
 
-//    ^                 # start-of-string
-//            (?=.*[0-9])       # a digit must occur at least once
-//            (?=.*[a-z])       # a lower case letter must occur at least once
-//            (?=.*[A-Z])       # an upper case letter must occur at least once
-//            (?=.*[@#$%^&+=])  # a special character must occur at least once you can replace with your special characters
-//            (?=\\S+$)          # no whitespace allowed in the entire string
-//            .{4,}             # anything, at least six places though
-//    $                 # end-of-string
+//(			# Start of group
+//            (?=.*\d)		#   must contains one digit from 0-9
+//            (?=.*[a-z])		#   must contains one lowercase characters
+//            (?=.*[A-Z])		#   must contains one uppercase characters
+//            (?=.*[@#$%])		#   must contains one special symbols in the list "@#$%"
+//            .		#     match anything with previous condition checking
+//    {6,20}	#        length at least 6 characters and maximum of 20
+//            )			# End of group
+//
 
+//    "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,13})"
 
-    //Mai check ka check tam mai ka
     private boolean validatePwd() {
         boolean pwdIsValidated = true;
         String text = etPwd.getText().toString();
-        if (!text.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{8,}")) {
+        if (!text.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,13})")){
             pwdIsValidated = false;
-            etPwd.setError("Invalid format");
+            etPwd.setError("Require 6-13 char,[a-z],[A-Z],[0-9]");
         }
 
         return pwdIsValidated;
