@@ -35,9 +35,11 @@ public class Option1Activity extends AppCompatActivity {
         findViewById(R.id.btn_validate1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validateEditText()) {
+                if (validateEditText()&&validateName()&&validatePwd()&&validateEmail()&&validatePhone()) {
                     Toast.makeText(Option1Activity.this, "Okay. You are good to go.", Toast.LENGTH_SHORT).show();
                     // SnackBar?
+                }else {
+                    Toast.makeText(Option1Activity.this, "Please, try again.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -183,7 +185,7 @@ public class Option1Activity extends AppCompatActivity {
         String text = etEmail.getText().toString();
         if (!text.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
             emailIsValidated = false;
-            etEmail.setError("Invalid format");
+            etEmail.setError("Invalid, hint: pailin@example.com");
         }
 
         return emailIsValidated;
